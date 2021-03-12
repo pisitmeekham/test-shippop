@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>ProgrammerTest</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="inputBox1">
+            <div>
+                List
+            </div>
+            <input type="text" id="numInput" name="numInput">
+        </div>
+        <div class="inputBox2">
+            <div>
+                ค้นหา
+            </div>
+            <input type="text" id="numInput2" name="numInput2">
+            <button type="button" id="buttonText" onclick="main()">ค้นหา</button>
+        </div>
+        <div class="categoryBox">
+            <div>
+                ประเภทการค้นหา
+            </div>
+            <select id="searchs">
+                <option id="linearSearch" name="linearSearch" value="linear" />
+                1. Linear Search
+                </option>
+                <option id="binarySearch" name="binarySearch" value="binary" />
+                2. Binary Search
+                </option>
+                <option id="bubbleSearch" name="bubbleSearch" value="bubble" />
+                3. Bubble Search
+                </option>
+            </select>
+        </div>
+        <div class="result">
+            <div>
+                ผลลัพธ์
+            </div>
+            <div class="boxresult" id="result">
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <script>
+        function main() {
+            var value1 = inputFunction();
+            var value2 = searchFunction();
+            var search = Category();
+            var node = document.createElement("div");
+            var node2 = document.createElement("div");
+            var node3 = document.createElement("div");
+            var textnode1 = document.createTextNode("Input :  [" + value1 + "]");
+            var textnode2 = document.createTextNode("Search : " + value2 );
+            var textnode3 = document.createTextNode("Result :::");
+            node.appendChild(textnode1);
+            node2.appendChild(textnode2);
+            node3.appendChild(textnode3);
+            document.getElementById("result").appendChild(node);
+            document.getElementById("result").appendChild(node2);
+            document.getElementById("result").appendChild(node3);
+            switch (search) {
+                case "linear":
+                    linearSearch(value1, value2);
+                    break
+                case "binary":
+                    binarySearch(value1, value2);
+                    break
+                case "bubble":
+                    bubbleSearch(value1, value2);
+                    break
+            }
+        }
+
+        function inputFunction() {
+            var field1 = document.getElementById("numInput").value;
+            var res = field1.split(",").map(octet => parseInt(octet, 10));
+            document.getElementById("numInput").value = "";
+            return res
+        }
+
+        function searchFunction() {
+            var field2 = document.getElementById("numInput2").value;
+            var res1 = parseInt(field2);
+            document.getElementById("numInput2").value = "";
+            return res1
+        }
+
+        function Category() {
+            var select = document.getElementById("searchs").value;
+            return select
+        }
+
+        function linearSearch(arr, key) {
+            for (let i = 0; i < arr.length; i++) {
+                var j = i + 1;
+                if (arr[i] === key) {
+                    correctDiv(j, arr[i], key);
+                    break
+                } else {
+                    notcorrectDiv(j, arr[i], key);
+                }
+            }
+        }
+
+        function binarySearch(arr, key) {
+            let start = 0;
+            let end = arr.length - 1;
+            arr.sort((a, b) => a - b);
+            for (let i = 0; i < arr.length; i++) {
+                var j = i + 1
+                let middle = Math.floor((start + end) / 2);
+                if (arr[middle] === key) {
+                    correctDiv(j, arr[middle], key);
+                    break
+                } else if (arr[middle] < key) {
+                    notcorrectDiv(j, arr[middle], key);
+                    start = middle + 1;
+                } else {
+                    notcorrectDiv(j, arr[middle], key);
+                    end = middle - 1;
+                }
+            }
+            // key wasn't found
+            return -1;
+        }
+
+        function bubbleSearch(arr, key) {
+            let bubbleSort = arr => {
+                let len = arr.length;
+                for (let i = 0; i < len; i++) {
+                    for (let j = 0; j < len; j++) {
+                        if (inputArr[j] > inputArr[j + 1]) {
+                            let tmp = inputArr[j];
+                            inputArr[j] = inputArr[j + 1];
+                            inputArr[j + 1] = tmp;
+                        }
+                    }
+                }
+                return inputArr;
+            };
+        }
+
+        function notcorrectDiv(i, j, k) {
+            var node = document.createElement("div");
+            var result = document.createTextNode("Round : " + i + " ===> " + k + " != " + j);
+            node.appendChild(result);
+            document.getElementById("result").appendChild(node);
+        }
+
+        function correctDiv(i, j, k) {
+            var node = document.createElement("div");
+            var result = document.createTextNode("Round : " + i + " ===> " + k + " = " + j + " found!! ");
+            node.appendChild(result);
+            document.getElementById("result").appendChild(node);
+        }
+    </script>
+</body>
+
+</html>
