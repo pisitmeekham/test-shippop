@@ -57,11 +57,12 @@
             var value1 = inputFunction();
             var value2 = searchFunction();
             var search = Category();
+            console.log(value1)
             var node = document.createElement("div");
             var node2 = document.createElement("div");
             var node3 = document.createElement("div");
             var textnode1 = document.createTextNode("Input :  [" + value1 + "]");
-            var textnode2 = document.createTextNode("Search : " + value2 );
+            var textnode2 = document.createTextNode("Search : " + value2);
             var textnode3 = document.createTextNode("Result :::");
             node.appendChild(textnode1);
             node2.appendChild(textnode2);
@@ -135,20 +136,8 @@
             return -1;
         }
 
-        function bubbleSearch(arr, key) {
-            let bubbleSort = arr => {
-                let len = arr.length;
-                for (let i = 0; i < len; i++) {
-                    for (let j = 0; j < len; j++) {
-                        if (inputArr[j] > inputArr[j + 1]) {
-                            let tmp = inputArr[j];
-                            inputArr[j] = inputArr[j + 1];
-                            inputArr[j + 1] = tmp;
-                        }
-                    }
-                }
-                return inputArr;
-            };
+        function bubbleSearch() {
+            alert("ไม่ทราบว่า bubble search คืออะไร")
         }
 
         function notcorrectDiv(i, j, k) {
